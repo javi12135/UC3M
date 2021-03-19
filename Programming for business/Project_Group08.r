@@ -2,12 +2,7 @@
 #Fco. Javier Hernández Ares 100453593
 #sample(1:6, 1)
 
-EndGame<-function(){
-  print("The current game has ended")
-  quit()
-}
-
-Option1<-function(){
+Option1<-function(){ #Asks number of players and names each player
   print("Welcome to the Game of the Goose")
   num_of_players=100
   while (num_of_players>=5) {
@@ -34,7 +29,7 @@ Option1<-function(){
   }
 }
 
-Option2<-function(){
+Option2<-function(){ #Goes through each player's turn
   print("Let's play!")
   print("You can quit the game at any time by pressing 4")
   if (YN1=="Yes"){
@@ -57,7 +52,7 @@ Option2<-function(){
   }
 }
 
-RollP1<-function(){
+RollP1<-function(){ #Asks if P1 wants to roll the dice
   YN1=readline(prompt="Please, player 1, it's your turn, do you want to roll the dice (Yes/No)")
   if (YN1=="Yes"){
     print("lol")
@@ -73,7 +68,7 @@ RollP1<-function(){
   }
 }
 
-RollP2<-function(){
+RollP2<-function(){ #Asks if P2 wants to roll the dice
   YN2=readline(prompt="Please, player 2, it's your turn, do you want to roll the dice (Yes/No)")
   if (YN2=="Yes"){
     print("lol")
@@ -89,7 +84,7 @@ RollP2<-function(){
   }
 }
 
-RollP3<-function(){
+RollP3<-function(){ #Asks if P3 wants to roll the dice
   YN3=readline(prompt="Please, player 3, it's your turn, do you want to roll the dice (Yes/No)")
   if (YN3=="Yes"){
     print("lol")
@@ -105,7 +100,7 @@ RollP3<-function(){
   }
 }
 
-RollP4<-function(){
+RollP4<-function(){ #Asks if P4 wants to roll the dice
   YN4=readline(prompt="Please, player 4, it's your turn, do you want to roll the dice (Yes/No)")
   if (YN4=="Yes"){
     Dice4()
@@ -121,9 +116,14 @@ RollP4<-function(){
   }
 }
 
-Dice1<-function(){
+Dice1<-function(){ #Rolls P1's dice
   dice<-sample(1:6, 1)
   Place1=Place1+dice
+}
+
+EndGame<-function(){ #Quits the game
+  print("The current game has ended")
+  quit()
 }
 
 Game<-function(){
