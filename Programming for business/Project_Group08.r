@@ -8,8 +8,12 @@ Menu<-function(){
 }
 
 MenuChoice<-function(){
-  print("What do you want to do?\n1.Choose the name of the players and play\n2.Play the Game of the Goose\n3.Record the player names and games won\n4.Quit the game")
-  Choice=scan(,,1)
+  print("What do you want to do?")
+  print("1.Choose the name of the players and play")
+  print("2.Play the Game of the Goose")
+  print("3.Record the player names and games won")
+  print("4.Quit the game")
+  choice=scan(,,1)
   if (choice==1){
     Play()
   }
