@@ -6,7 +6,7 @@
 #Inn: You miss 2 turns. 19
 #Jail: You miss 3 turns. 56
 #Well: You miss 4 turns. 31
-#Mace: Go back to space 30. 42
+#Maze: Go back to space 30. 42
 #Death: Restart. 58
 
 Menu<-function(){
@@ -39,8 +39,9 @@ MenuChoice<-function(){
 }
 
 Play<-function(){
-  Tablero<<-c(1:63)
-  #Tablero[1,5,9,14,18,23,27,32,36,41,45,50,54,59,63]<<-"Goose" Hay que hacerlo de uno en uno
+  Tablero<<-c("Goose",2,3,4,"Goose","Bridge",7,8,"Goose",10,11,"Bridge",13,"Goose",15,16,17,"Goose","Inn",20,
+  21,22,"Goose",24,25,"Dices","Goose",28,29,30,"Well","Goose",33,34,35,"Goose",37,38,39,40,
+  "Goose","Maze",43,44,"Goose",46,47,48,49,"Goose",51,52,"Dices","Goose",55,"Jail",57,"Death","Goose",60,61,62,"Goose")
   Option1()
   Option2()
 }
