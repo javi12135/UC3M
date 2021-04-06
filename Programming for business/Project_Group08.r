@@ -40,7 +40,11 @@ MenuChoice<-function(){
 
 Play<-function(){
   Tablero<<-c(1:63)
+<<<<<<< HEAD
   #Tablero[1,5,9,14,18,23,27,32,36,41,45,50,54,59,63]<<-"Goose" Hay que hacerlo de uno en uno
+=======
+  Tablero[1,5,9,14,18,23,27,32,36,41,45,50,54,59,63]<<-"Goose"
+>>>>>>> 9424291ebc379a8987159fda122b3a1394851830
   Option1()
   Option2()
 }
