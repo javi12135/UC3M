@@ -35,13 +35,13 @@ Menu<-function(){ #Shows the menu
   }
 }
 
-Play<-function(){
+Play<-function(){ #Creates the board
   TableroPermanente<<-c("Goose4",2,3,4,"Goose4","Bridge",7,8,"Goose5",10,11,"Bridge",13,"Goose4",15,16,17,"Goose5","Inn",20,
   21,22,"Goose4",24,25,"Dices","Goose5",28,29,30,"Well","Goose4",33,34,35,"Goose5",37,38,39,40,
   "Goose4","Maze",43,44,"Goose5",46,47,48,49,"Goose4",51,52,"Dices","Goose5",55,"Jail",57,"Death","Goose4",60,61,62,"End")
-  TableroVisible<<-c("Goose",2,3,4,"Goose","Bridge",7,8,"Goose",10,11,"Bridge",13,"Goose",15,16,17,"Goose","Inn",20,
-  21,22,"Goose",24,25,"Dices","Goose",28,29,30,"Well","Goose",33,34,35,"Goose",37,38,39,40,
-  "Goose","Maze",43,44,"Goose",46,47,48,49,"Goose",51,52,"Dices","Goose",55,"Jail",57,"Death","Goose",60,61,62,"End")
+  TableroVisible<<-c("1 Goose",2,3,4,"5 Goose","6 Bridge",7,8,"9 Goose",10,11,"12 Bridge",13,"14 Goose",15,16,17,"18 Goose","19 Inn",20,
+  21,22,"23 Goose",24,25,"26 Dices","27 Goose",28,29,30,"31 Well","32 Goose",33,34,35,"36 Goose",37,38,39,40,
+  "41 Goose","42 Maze",43,44,"45 Goose",46,47,48,49,"49 Goose",51,52,"53 Dices","54 Goose",55,"56 Jail",57,"58 Death","59 Goose",60,61,62,"63 End")
   Option1()
   Option2()
 }
@@ -81,42 +81,52 @@ RollP1<-function(){ #Asks if P1 wants to roll the dice
 
 Dice1<-function(){ #Rolls P1's dice
   dice<<-sample(1:6, 1)
+  Place1<<-Place1+dice
+  print(TableroVisible[Place1])
+  TableroVisible[Place1]<-Player_1
   print("You got a:")
   print(dice)
-  Place1<<-Place1+dice
+  #If Place>63
   print("You are in square:")
   print(Place1)
-  TableroVisible[Place1]<-Player_1
   print(TableroVisible)
   Casillas1()
 }
 
-Casillas1<-function(){
+Casillas1<-function(){ #Checks if the player is in a special square
   if ((TableroPermanente[Place1]=="Goose4") | (TableroPermanente[Place1]=="Goose5")){
     Goose()
   }
   else if (TableroPermanente[Place1]=="Bridge"){
+    Bridge()
   }
   else if (TableroPermanente[Place1]=="Dices"){
+    Dices()
   }
   else if (TableroPermanente[Place1]=="Inn"){
+    Inn()
   }
   else if (TableroPermanente[Place1]=="Jail"){
+    Jail()
   }
   else if (TableroPermanente[Place1]=="Well"){
+    Well()
   }
   else if (TableroPermanente[Place1]=="Maze"){
+    Maze()
   }
   else if (TableroPermanente[Place1]=="Death"){
+    Death()
   }
   else if (TableroPermanente[Place1]=="End"){
+    FinishGame()
   }
   else {
     RollP1()
   }
 }
 
-Goose<-function(){
+Goose<-function(){ #Moves the player to the next goose
   if (TableroPermanente[Place1]=="Goose4"){
     Place1<<-Place1+4
   }
@@ -132,6 +142,67 @@ Goose<-function(){
     print("From goose to goose, faster than a moose")
     Dice1()
   }
+}
+
+Bridge<-function(){ #Moves the player from one bridge to the other
+  if (Place1==6){
+    Place1<<-12
+  }
+  else if (Place1==12){
+    Place1<<-6
+  }
+  TableroVisible[Place1]<-Player_1
+  print(TableroVisible)
+  print("From bridge to bridge, I roll as I reach")
+  Dice1()
+}
+
+Dices<-function(){ #Moves the player from one dice to the other
+  if (Place1==26){
+    Place1<<-53
+  }
+  else if (Place1==53){
+    Place1<<-26
+  }
+  TableroVisible[Place1]<-Player_1
+  print(TableroVisible)
+  print("From dice to dice, I roll to win the prize")
+  Dice1()
+}
+
+Inn<-function(){ #Makes the player wait 2 turns at the Inn
+  print("You miss 2 turns")
+  RollP1()
+}
+
+Jail<-function(){ #Makes the player wait 3 turns in Jail
+  print("You miss 3 turns")
+  RollP1()
+}
+
+Well<-function(){ #Makes the player wait 4 turns in the Well
+  print("You miss 4 turns, since other players cannot rescue you")
+  RollP1()
+}
+
+Maze<-function(){ #Takes the player back to square 30
+  Place1<<-30
+  TableroVisible[Place1]<-Player_1
+  print(TableroVisible)
+  print("Lost in the Maze")
+  RollP1()
+}
+
+Death<-function(){ #Makes the player start again
+  Place1<<-0
+  print("Death: You start from the beginning")
+  RollP1()
+}
+
+FinishGame<-function(){ #Ends the game after the player has won
+  print("Congratulations! You have won the Game of the Goose")
+  #Record winner in .txt file
+  quit()
 }
 
 Option3<-function(){ #Records the players' names and games won in .txt file
