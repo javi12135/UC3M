@@ -1,6 +1,8 @@
 #Paula Esparza Valdés 100418689
 #Fco. Javier Hernández Ares 100453593
 #Goose spaces: Go to next goose and re-roll. 1,5,9,14,18,23,27,32,36,41,45,50,54,59,63
+#Goose +4:1,5,14,23,32,41,50,59
+#Goose +5:9,18,27,36,45,54
 #Bridge: Go to the other bridge and re-roll. 6,12
 #Dices: Go to the other dices and re-roll. 26,53
 #Inn: You miss 2 turns. 19
@@ -9,12 +11,7 @@
 #Maze: Go back to space 30. 42
 #Death: Restart. 58
 
-Menu<-function(){
-  print("Welcome to the Game of the Goose")
-  MenuChoice()
-}
-
-MenuChoice<-function(){
+Menu<-function(){ #Shows the menu
   print("What do you want to do?")
   print("1.Choose the name of the players and play")
   print("2.Play the Game of the Goose")
@@ -34,14 +31,17 @@ MenuChoice<-function(){
     EndGame()
   }
   else {
-    MenuChoice()
+    Menu()
   }
 }
 
 Play<-function(){
-  Tablero<<-c("Goose",2,3,4,"Goose","Bridge",7,8,"Goose",10,11,"Bridge",13,"Goose",15,16,17,"Goose","Inn",20,
+  TableroPermanente<<-c("Goose4",2,3,4,"Goose4","Bridge",7,8,"Goose5",10,11,"Bridge",13,"Goose4",15,16,17,"Goose5","Inn",20,
+  21,22,"Goose4",24,25,"Dices","Goose5",28,29,30,"Well","Goose4",33,34,35,"Goose5",37,38,39,40,
+  "Goose4","Maze",43,44,"Goose5",46,47,48,49,"Goose4",51,52,"Dices","Goose5",55,"Jail",57,"Death","Goose4",60,61,62,"End")
+  TableroVisible<<-c("Goose",2,3,4,"Goose","Bridge",7,8,"Goose",10,11,"Bridge",13,"Goose",15,16,17,"Goose","Inn",20,
   21,22,"Goose",24,25,"Dices","Goose",28,29,30,"Well","Goose",33,34,35,"Goose",37,38,39,40,
-  "Goose","Maze",43,44,"Goose",46,47,48,49,"Goose",51,52,"Dices","Goose",55,"Jail",57,"Death","Goose",60,61,62,"Goose")
+  "Goose","Maze",43,44,"Goose",46,47,48,49,"Goose",51,52,"Dices","Goose",55,"Jail",57,"Death","Goose",60,61,62,"End")
   Option1()
   Option2()
 }
@@ -59,7 +59,7 @@ Option2<-function(){ #Goes through each player's turn
     RollP1()
   }
   else if (YN1=="No"){
-    MenuChoice()
+    Menu()
   }
 }
 
@@ -81,18 +81,63 @@ RollP1<-function(){ #Asks if P1 wants to roll the dice
 
 Dice1<-function(){ #Rolls P1's dice
   dice<<-sample(1:6, 1)
+  print("You got a:")
   print(dice)
   Place1<<-Place1+dice
+  print("You are in square:")
   print(Place1)
-
+  TableroVisible[Place1]<-Player_1
+  print(TableroVisible)
+  Casillas1()
 }
 
+Casillas1<-function(){
+  if ((TableroPermanente[Place1]=="Goose4") | (TableroPermanente[Place1]=="Goose5")){
+    Goose()
+  }
+  else if (TableroPermanente[Place1]=="Bridge"){
+  }
+  else if (TableroPermanente[Place1]=="Dices"){
+  }
+  else if (TableroPermanente[Place1]=="Inn"){
+  }
+  else if (TableroPermanente[Place1]=="Jail"){
+  }
+  else if (TableroPermanente[Place1]=="Well"){
+  }
+  else if (TableroPermanente[Place1]=="Maze"){
+  }
+  else if (TableroPermanente[Place1]=="Death"){
+  }
+  else if (TableroPermanente[Place1]=="End"){
+  }
+  else {
+    RollP1()
+  }
+}
 
+Goose<-function(){
+  if (TableroPermanente[Place1]=="Goose4"){
+    Place1<<-Place1+4
+  }
+  else if (TableroPermanente[Place1]=="Goose5"){
+    Place1<<-Place1+5
+  }
+  if (Place1==63){
+    FinishGame()
+  }
+  else {
+    TableroVisible[Place1]<-Player_1
+    print(TableroVisible)
+    print("From goose to goose, faster than a moose")
+    Dice1()
+  }
+}
 
 Option3<-function(){ #Records the players' names and games won in .txt file
   #Save game in .txt file
   print("Winner will be recorded in .txt file")
-  MenuChoice()
+  Menu()
 }
 
 EndGame<-function(){ #Quits the game
@@ -101,6 +146,7 @@ EndGame<-function(){ #Quits the game
 }
 
 Game<-function(){
+  print("Welcome to the Game of the Goose")
   Menu()
 }
 
