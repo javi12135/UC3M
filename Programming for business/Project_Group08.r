@@ -41,7 +41,7 @@ Play<-function(){ #Creates the board
   "Goose4","Maze",43,44,"Goose5",46,47,48,49,"Goose4",51,52,"Dices","Goose5",55,"Jail",57,"Death","Goose4",60,61,62,"End")
   TableroVisible<<-c("1 Goose",2,3,4,"5 Goose","6 Bridge",7,8,"9 Goose",10,11,"12 Bridge",13,"14 Goose",15,16,17,"18 Goose","19 Inn",20,
   21,22,"23 Goose",24,25,"26 Dices","27 Goose",28,29,30,"31 Well","32 Goose",33,34,35,"36 Goose",37,38,39,40,
-  "41 Goose","42 Maze",43,44,"45 Goose",46,47,48,49,"49 Goose",51,52,"53 Dices","54 Goose",55,"56 Jail",57,"58 Death","59 Goose",60,61,62,"63 End")
+  "41 Goose","42 Maze",43,44,"45 Goose",46,47,48,49,"50 Goose",51,52,"53 Dices","54 Goose",55,"56 Jail",57,"58 Death","59 Goose",60,61,62,"63 End")
   Option1()
   Option2()
 }
@@ -64,11 +64,11 @@ Option2<-function(){ #Goes through each player's turn
 }
 
 RollP1<-function(){ #Asks if P1 wants to roll the dice
-  YN1<<-readline(prompt="Please, player 1, it's your turn, do you want to roll the dice (Yes/No)")
-  if (YN1=="Yes"){
+  YN1<<-readline(prompt="Please, player 1, it's your turn, do you want to roll the dice? (Yes/No) ")
+  if ((YN1=="Yes") | (YN1=="yes") | (YN1=="Y") | (YN1=="y")){
     Dice1()
   }
-  else if (YN1=="No"){
+  else if ((YN1=="No") | (YN1=="no") | (YN1=="N") | (YN1=="n")){
     Option2()
   }
   else if (YN1=="4"){
@@ -82,14 +82,15 @@ RollP1<-function(){ #Asks if P1 wants to roll the dice
 Dice1<-function(){ #Rolls P1's dice
   dice<<-sample(1:6, 1)
   Place1<<-Place1+dice
-  print(TableroVisible[Place1])
-  TableroVisible[Place1]<-Player_1
   print("You got a:")
   print(dice)
-  #If Place>63
-  print("You are in square:")
-  print(Place1)
-  print(TableroVisible)
+  if (Place1>63) {
+    Place1=126-Place1
+  }
+  print("You go to square:")
+  print(TableroVisible[Place1])
+  #TableroVisible[Place1]<-Player_1
+  #print(TableroVisible)
   Casillas1()
 }
 
@@ -122,6 +123,8 @@ Casillas1<-function(){ #Checks if the player is in a special square
     FinishGame()
   }
   else {
+    TableroVisible[Place1]<-Player_1
+    print(TableroVisible)
     RollP1()
   }
 }
@@ -137,9 +140,12 @@ Goose<-function(){ #Moves the player to the next goose
     FinishGame()
   }
   else {
+    print("From goose to goose, faster than a moose")
+    print("You go to square:")
+    print(TableroVisible[Place1])
     TableroVisible[Place1]<-Player_1
     print(TableroVisible)
-    print("From goose to goose, faster than a moose")
+    print("You roll again")
     Dice1()
   }
 }
@@ -151,9 +157,12 @@ Bridge<-function(){ #Moves the player from one bridge to the other
   else if (Place1==12){
     Place1<<-6
   }
+  print("From bridge to bridge, I roll as I reach")
+  print("You go to square:")
+  print(TableroVisible[Place1])
   TableroVisible[Place1]<-Player_1
   print(TableroVisible)
-  print("From bridge to bridge, I roll as I reach")
+  print("You roll again")
   Dice1()
 }
 
@@ -164,32 +173,43 @@ Dices<-function(){ #Moves the player from one dice to the other
   else if (Place1==53){
     Place1<<-26
   }
+  print("From dice to dice, I roll to win the prize")
+  print("You go to square:")
+  print(TableroVisible[Place1])
   TableroVisible[Place1]<-Player_1
   print(TableroVisible)
-  print("From dice to dice, I roll to win the prize")
+  print("You roll again")
   Dice1()
 }
 
 Inn<-function(){ #Makes the player wait 2 turns at the Inn
+  TableroVisible[Place1]<-Player_1
+  print(TableroVisible)
   print("You miss 2 turns")
   RollP1()
 }
 
 Jail<-function(){ #Makes the player wait 3 turns in Jail
+  TableroVisible[Place1]<-Player_1
+  print(TableroVisible)
   print("You miss 3 turns")
   RollP1()
 }
 
 Well<-function(){ #Makes the player wait 4 turns in the Well
+  TableroVisible[Place1]<-Player_1
+  print(TableroVisible)
   print("You miss 4 turns, since other players cannot rescue you")
   RollP1()
 }
 
 Maze<-function(){ #Takes the player back to square 30
   Place1<<-30
+  print("Lost in the Maze")
+  print("You go to square:")
+  print(TableroVisible[Place1])
   TableroVisible[Place1]<-Player_1
   print(TableroVisible)
-  print("Lost in the Maze")
   RollP1()
 }
 
@@ -201,12 +221,12 @@ Death<-function(){ #Makes the player start again
 
 FinishGame<-function(){ #Ends the game after the player has won
   print("Congratulations! You have won the Game of the Goose")
-  #Record winner in .txt file
+  #F00 #F00 Record winner in .txt file
   quit()
 }
 
 Option3<-function(){ #Records the players' names and games won in .txt file
-  #Save game in .txt file
+  #F00 #F00 Save game in .txt file
   print("Winner will be recorded in .txt file")
   Menu()
 }
@@ -216,7 +236,7 @@ EndGame<-function(){ #Quits the game
   quit()
 }
 
-Game<-function(){
+Game<-function(){ #Starts the game
   print("Welcome to the Game of the Goose")
   Menu()
 }
