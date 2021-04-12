@@ -89,8 +89,6 @@ Dice1<-function(){ #Rolls P1's dice
   }
   print("You go to square:")
   print(TableroVisible[Place1])
-  #TableroVisible[Place1]<-Player_1
-  #print(TableroVisible)
   Casillas1()
 }
 
