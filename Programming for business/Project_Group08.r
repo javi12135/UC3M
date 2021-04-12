@@ -85,7 +85,7 @@ Dice1<-function(){ #Rolls P1's dice
   print("You got a:")
   print(dice)
   if (Place1>63) {
-    Place1=126-Place1
+    Place1<<-126-Place1
   }
   print("You go to square:")
   print(TableroVisible[Place1])
