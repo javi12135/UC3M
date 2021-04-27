@@ -47,6 +47,11 @@ Play<-function(){ #Creates the board
 }
 
 Option1<-function(){ #Since there is only one player, it asks Player 1 for their name
+  num_players<<-0
+  while (num_players!=1){
+    print("How many players will play?")
+    num_players<<-scan(,,1)
+  }
   Player_1<<-readline(prompt="Please, insert the name of player 1 ")
   YN1<<-"Yes"
   Place1<<-0
@@ -184,6 +189,12 @@ Inn<-function(){ #Makes the player wait 2 turns at the Inn
   TableroVisible[Place1]<-Player_1
   print(TableroVisible)
   print("You miss 2 turns")
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
   RollP1()
 }
 
@@ -191,6 +202,15 @@ Jail<-function(){ #Makes the player wait 3 turns in Jail
   TableroVisible[Place1]<-Player_1
   print(TableroVisible)
   print("You miss 3 turns")
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
   RollP1()
 }
 
@@ -198,6 +218,18 @@ Well<-function(){ #Makes the player wait 4 turns in the Well
   TableroVisible[Place1]<-Player_1
   print(TableroVisible)
   print("You miss 4 turns, since other players cannot rescue you")
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
+  dice<<-sample(1:6, 1)
+  print("You got a:")
+  print(dice)
   RollP1()
 }
 
