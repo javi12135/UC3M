@@ -251,12 +251,36 @@ Death<-function(){ #Makes the player start again
 
 FinishGame<-function(){ #Ends the game after the player has won
   print("Congratulations! You have won the Game of the Goose")
-  #F00 #F00 Record winner in .txt file
+  if (record==TRUE){
+    print("The winner will be recorded")
+    if (exists==FALSE){ #If the file doesn't exist
+      winners<<-matrix(c("Players","Games won",Player_1,1),2,2)
+      print(winners)
+      write.table(winners, file="C://GROUP83//Group83-G8-Players.txt")
+    }
+    if (exists==TRUE){ #If the file already exists
+      winners<<-read.table("C://GROUP83//Group83-G8-Players.txt", header=TRUE)
+      new_player<<-TRUE
+      for (i in 2:nrow(winners)){
+        Player<<-winners[i]
+        if (Player==Player_1){ #If the player has won before
+          new_player<<-FALSE
+          winners[i,2]<<-winners[i,2]+1
+        }
+      }
+      if (new_player==TRUE){ #If the player hasn't won before
+        winners<<-rbind(winners,c(Player_1,1))
+      }
+      print(winners)
+      write.table(winners, file="C://GROUP83//Group83-G8-Players.txt")
+    }
+  }
   quit()
 }
 
 Option3<-function(){ #Records the players' names and games won in .txt file
-  #F00 #F00 Save game in .txt file
+  record<<-TRUE
+  exists<<-file.exists("C://GROUP83//Group83-G8-Players.txt")
   print("Winner will be recorded in .txt file")
   Menu()
 }
@@ -268,6 +292,7 @@ EndGame<-function(){ #Quits the game
 
 Game<-function(){ #Starts the game
   print("Welcome to the Game of the Goose")
+  record=FALSE
   Menu()
 }
 
