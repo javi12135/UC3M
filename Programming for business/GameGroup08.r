@@ -17,7 +17,7 @@ Menu<-function(){ #Shows the menu
   print("2.Play the Game of the Goose")
   print("3.Record the players' names and games won")
   print("4.Quit the game")
-  choice<<-scan(,,1)
+  choice<<-readline()
   if (choice==1){
     Play()
   }
@@ -50,7 +50,7 @@ Option1<-function(){ #Since there is only one player, it asks Player 1 for their
   num_players<<-0
   while (num_players!=1){
     print("How many players will play?")
-    num_players<<-scan(,,1)
+    num_players<<-readline()
   }
   Player_1<<-readline(prompt="Please, insert the name of player 1 ")
   YN1<<-"Yes"
@@ -254,14 +254,14 @@ FinishGame<-function(){ #Ends the game after the player has won
   if (record==TRUE){
     print("The winner will be recorded")
     if (ArchivoExiste==FALSE){ #If the file doesn't exist
-      winners<<-matrix(c("Players","Games won",Player_1,1),2,2)
+      winners<<-matrix(c("Players","Games won",Player_1,1),2,2,byrow=TRUE)
       print(winners)
       write.table(winners, file="C://GROUP83//Group83-G8-Players.txt")
     }
     if (ArchivoExiste==TRUE){ #If the file already exists
       winners<<-read.table("C://GROUP83//Group83-G8-Players.txt", header=TRUE)
       new_player<<-TRUE
-      for (i in 2:nrow(winners)){
+      for (i in 3:nrow(winners)){
         Player<<-winners[i]
         if (Player==Player_1){ #If the player has won before
           new_player<<-FALSE
