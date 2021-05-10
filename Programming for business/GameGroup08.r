@@ -259,13 +259,16 @@ FinishGame<-function(){ #Ends the game after the player has won
       write.table(winners, file="C://GROUP83//Group83-G8-Players.txt")
     }
     if (ArchivoExiste==TRUE){ #If the file already exists
-      winners<<-read.table("C://GROUP83//Group83-G8-Players.txt", header=TRUE)
+      winners<<-read.table("C://GROUP83//Group83-G8-Players.txt", header=TRUE, stringsAsFactors=FALSE)
       new_player<<-TRUE
-      for (i in 3:nrow(winners)){
-        Player<<-winners[i]
-        if (Player==Player_1){ #If the player has won before
-          new_player<<-FALSE
-          winners[i,2]<<-winners[i,2]+1
+      for (i in 2:nrow(winners)){
+        for(j in 1:ncol(winners)){
+          Player<<-winners[i,j]
+          if (Player==Player_1){ #If the player has won before
+            new_player<<-FALSE
+            num_of_wins<<-as.numeric(winners[i,2])
+            winners[i,2]<<-num_of_wins+1
+          }
         }
       }
       if (new_player==TRUE){ #If the player hasn't won before
