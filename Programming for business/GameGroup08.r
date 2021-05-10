@@ -275,7 +275,7 @@ FinishGame<-function(){ #Ends the game after the player has won
       write.table(winners, file="C://GROUP83//Group83-G8-Players.txt")
     }
   }
-  quit()
+  quit(save="ask", status=0, runLast=TRUE)
 }
 
 Option3<-function(){ #Records the players' names and games won in .txt file
@@ -287,7 +287,7 @@ Option3<-function(){ #Records the players' names and games won in .txt file
 
 EndGame<-function(){ #Quits the game
   print("The current game has ended")
-  quit()
+  quit(save="ask", status=0, runLast=TRUE)
 }
 
 Game<-function(){ #Starts the game
