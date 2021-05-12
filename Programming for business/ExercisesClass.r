@@ -105,3 +105,89 @@ ExercisesVectors2<-function(){
   print(A)
   print(Res)
 }
+
+#Exercises Exercises-Vectors 3
+ExercisesVectors3<-function(){
+  A=c(2,4,5,7)
+  Even=c()
+  Odd=c()
+  for (i in A){
+    if ((i%%2)==0){
+      Even=c(Even,i)
+    }
+    else {
+      Odd=c(Odd,i)
+    }
+  }
+  print(A)
+  print(Even)
+  print(Odd)
+}
+
+#Exercises Exercises-Vectors 4
+ExercisesVectors4<-function(){
+  inputgrade=1000
+  repeat {
+    inputgrade=readline(prompt="Please, insert a grade: ")
+    inputgrade=as.numeric(inputgrade)
+    if ((inputgrade>=0)&(inputgrade<=10)){
+      break
+    }
+  }
+  if (inputgrade<5){
+    print("fail")
+  }
+  else {
+    print("pass")
+  }
+}
+
+#Exercises Exercises-Vectors 5
+ExercisesVectors5<-function(){
+  inputgrade=1000
+  repeat {
+    inputgrade=readline(prompt="Please, insert a grade: ")
+    inputgrade=as.numeric(inputgrade)
+    if ((inputgrade>=0)&(inputgrade<=10)){
+      break
+    }
+  }
+  if (inputgrade<5){
+    print("fail")
+  }
+  else if (inputgrade<7){
+    print("pass")
+  }
+  else if (inputgrade<9){
+    print("good")
+  }
+  else {
+    print("with honors")
+  }
+}
+
+#Exercises Exercises-Vectors 6
+ExercisesVectors6<-function(){
+  grades=c()
+  countgrades=0
+  while (countgrades!=5){
+    repeat {
+      inputgrade=readline(prompt="Please, insert a grade: ")
+      inputgrade=as.numeric(inputgrade)
+      if ((inputgrade>=0)&(inputgrade<=10)){
+        grades=c(grades,inputgrade)
+        countgrades=countgrades+1
+        break
+      }
+    }
+  }
+  for (i in 1:length(grades)){
+    if (grades[i]<5){
+      grades[i]="fail"
+    }
+    else {
+      grades[i]="pass"
+    }
+  }
+  print(grades)
+}
