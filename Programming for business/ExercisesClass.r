@@ -191,3 +191,83 @@ ExercisesVectors6<-function(){
   }
   print(grades)
 }
+
+#Exercises Exercises-Vectors 7
+ExercisesVectors7<-function(){
+  grades=c(4,7,2,9,3,5,7,9.5,3,8)
+  failcount=0
+  passcount=0
+  for (i in 1:length(grades)){
+    if (grades[i]<5){
+      failcount=failcount+1
+    }
+    else {
+      passcount=passcount+1
+    }
+  }
+  cat("Failed:", failcount,"\n")
+  cat("Passed:", passcount,"\n")
+  passcount=0
+  goodcount=0
+  withhonorscount=0
+  for (i in 1:length(grades)){
+    if ((grades[i]<7)&(grades[i]>=5)){
+      passcount=passcount+1
+    }
+    else if (grades[i]<9){
+      goodcount=goodcount+1
+    }
+    else {
+      withhonorscount=withhonorscount+1
+    }
+  }
+  cat("Failed:", failcount,"\n")
+  cat("Passed:", passcount,"\n")
+  cat("Good:", goodcount,"\n")
+  cat("With honors:", withhonorscount,"\n")
+}
+
+#Exercises Exercises-Vectors 8
+ExercisesVectors8<-function(){
+  grades=c(4,"Yes",7,"No",2,"No",9,"Yes",3,"No",5,"Yes",7,"No",9.5,"No",4.5,"Yes",8,"No")
+  print(grades)
+  Erasmuspass=0
+  Nationalpass=0
+  for (i in 1:length(grades)-1){
+    if (i%%2!=0){
+      checkgrade=as.numeric(grades[i])
+      if ((grades[i+1]=="Yes")&(checkgrade>=5)){
+        Erasmuspass=Erasmuspass+1
+      }
+      else if ((grades[i+1]=="No")&(checkgrade>=5)){
+        Nationalpass=Nationalpass+1
+      }
+    }
+  }
+  Totalpass=Erasmuspass+Nationalpass
+  cat("Erasmus students who passed:", Erasmuspass,"\n")
+  cat("Total students who passed:", Totalpass,"\n")
+  for (i in 1:length(grades)-1){
+    if (grades[i+1]=="Yes"){
+      newgrade=as.numeric(grades[i])
+      grades[i]=newgrade+1
+    }
+  }
+  print(grades)
+  Erasmuspass=0
+  Nationalpass=0
+  for (i in 1:length(grades)-1){
+    if (i%%2!=0){
+      checkgrade=as.numeric(grades[i])
+      if ((grades[i+1]=="Yes")&(checkgrade>=5)){
+        Erasmuspass=Erasmuspass+1
+      }
+      else if ((grades[i+1]=="No")&(checkgrade>=5)){
+        Nationalpass=Nationalpass+1
+      }
+    }
+  }
+  Totalpass=Erasmuspass+Nationalpass
+  cat("Erasmus students who passed:", Erasmuspass,"\n")
+  cat("Total students who passed:", Totalpass,"\n")
+}
