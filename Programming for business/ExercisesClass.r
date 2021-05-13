@@ -271,3 +271,76 @@ ExercisesVectors8<-function(){
   cat("Erasmus students who passed:", Erasmuspass,"\n")
   cat("Total students who passed:", Totalpass,"\n")
 }
+
+#Exercises Exercises-Matrix 1
+ExercisesMatrix1<-function(){
+  A=matrix(c(6,3,7,32,14,9,1,5,13,5,21,2),3,4)
+  B=matrix(0,nrow=ncol(A),ncol=nrow(A))
+  for (i in 1:nrow(A)){
+    for (j in 1:ncol(A)){
+      B[j,i]=A[i,j]
+    }
+  }
+  print(A)
+  print(B)
+}
+
+#Exercises Exercises-Matrix 2
+ExercisesMatrix2<-function(){
+  A=matrix(c(6,3,7,14,9,1,13,5,21),3)
+  B=A
+  C=c()
+  for (i in 1:nrow(A)){
+    C=c(C,A[i,i])
+    B[i,i]=i
+  }
+  print(A)
+  print(B)
+  print(C)
+}
+
+#Exercises Exercises-Matrix 3
+ExercisesMatrix3<-function(){
+  A=matrix(c(6,3,7,14,9,1,13,5,20),3)
+  repeat {
+    inputnumber=readline(prompt="Please, insert a number between 0 and 20: ")
+    asterisk=FALSE
+    for (i in 1:nrow(A)){
+      for (j in 1:ncol(A)){
+        if (inputnumber==A[i,j]){
+          A[i,j]="*"
+          print(A)
+          asterisk=TRUE
+        }
+      }
+    }
+    if (asterisk==TRUE){
+      for (i in 1:nrow(A)){
+        for (j in 1:ncol(A)){
+          if (A[i,j]!="*"){
+            asterisk=FALSE
+          }
+        }
+      }
+    }
+    if (asterisk==TRUE){
+      break
+    }
+  }
+}
+
+#Exercises Exercises-Matrix 4
+ExercisesMatrix4<-function(){
+  A=matrix(c(6,3,7,14,9,1,13,5,20),3)
+  for (k in 1:10) {
+    inputnumber=readline(prompt="Please, insert a number between 0 and 20: ")
+    for (i in 1:nrow(A)){
+      for (j in 1:ncol(A)){
+        if (inputnumber==A[i,j]){
+          A[i,j]="*"
+        }
+      }
+    }
+  }
+  print(A)
+}
