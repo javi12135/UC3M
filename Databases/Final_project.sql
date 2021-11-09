@@ -23,14 +23,14 @@ CREATE TABLE Movies(
   duration INTEGER NOT NULL,
   pg VARCHAR(128) CHECK (pg IN ('G', 'PG', 'PG-13', 'R', 'NC-17', 'Other')) NOT NULL,
   budget INTEGER NOT NULL,
-  imdbScore NUMBER(3,1) /*Between 0 and 10*/ NOT NULL, #F00
+  imdbScore NUMBER(3,1) CHECK (imdbScore <=10 AND imdbScore >=0) NOT NULL,
   genre VARCHAR2(128) NOT NULL,
   ingestionDate DATE NOT NULL,
   previous INTEGER,
 
   FOREIGN KEY (countryId) REFERENCES Countries(code),
   FOREIGN KEY (director) REFERENCES Directors(code),
-  FOREIGN KEY (previous) REFERENCES Movies(code) #F00
+  FOREIGN KEY (previous) REFERENCES Movies(code)
 )
 
 CREATE TABLE WorkedOn(
@@ -85,7 +85,7 @@ CREATE TABLE ListContents(
 CREATE TABLE ViewedMovies(
   profileId INTEGER,
   movieCode INTEGER,
-  score NUMBER(1) /*Between 0 and 5*/ NOT NULL, #F00
+  score NUMBER(1) CHECK (score <=10 AND score >=0) NOT NULL,
 
   PRIMARY KEY (profileId, movieCode),
   FOREIGN KEY (profileId) REFERENCES Profiles(id),
