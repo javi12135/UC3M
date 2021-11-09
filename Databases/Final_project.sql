@@ -36,7 +36,7 @@ CREATE TABLE Movies(
 CREATE TABLE WorkedOn(
   movieCode INTEGER,
   actorId INTEGER,
-  mainCharacter NOT NULL,
+  mainCharacter CHAR(1) CHECK (mainCharacter IN ('Y', 'N')) NOT NULL,
   likes INTEGER,
 
   PRIMARY KEY (movieCode, actorId),
