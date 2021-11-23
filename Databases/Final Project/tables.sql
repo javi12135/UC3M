@@ -59,17 +59,19 @@ CREATE TABLE Accounts(
 
 CREATE TABLE Profiles(
 	id INTEGER PRIMARY KEY,
-  name VARCHAR2(256) UNIQUE,
-  accountId VARCHAR2(10) UNIQUE,
+  name VARCHAR2(256),
+  accountId VARCHAR2(10),
 
+  UNIQUE(name, accountId)
   FOREIGN KEY (accountId) REFERENCES Accounts(id)
 )
 
 CREATE TABLE MovieLists(
   id INTEGER PRIMARY KEY,
-  profileId INTEGER UNIQUE,
-  name VARCHAR2(512) UNIQUE,
+  profileId INTEGER,
+  name VARCHAR2(512),
 
+	UNIQUE(profileId, name)
   FOREIGN KEY (profileId) REFERENCES Profiles(id)
 )
 

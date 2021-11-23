@@ -1,5 +1,5 @@
 set define off;
-insert into accounts values('U000001', 'Javier', 'Hernandez', 'fjhdezares@gmail.com',1234123456785678, 'USA', 'Male', TO_DATE ('20002/05/14','yyyy/MM/dd'));
+insert into accounts values('U000001', 'Javier', 'Hernandez', 'fjhdezares@gmail.com',1234123456785678, 'USA', 'Male', TO_DATE ('2002/05/14','yyyy/MM/dd'));
 insert into accounts values('U000002', 'Paula', 'Esparza', 'pauesparza@gmail.com',1234123456785679, 'USA', 'Female', TO_DATE ('2000/10/27','yyyy/MM/dd'));
 insert into accounts values('U000003', 'Mayte', 'Anton', 'mayanton@gmail.com',1234123456785670, 'USA', 'Female', TO_DATE ('2000/10/27','yyyy/MM/dd'));
 insert into accounts values('U000004', 'Andrea', 'Gutierrez', 'andguiterrez@gmail.com',1234123456785671, 'USA', 'Female', TO_DATE ('2001/10/27','yyyy/MM/dd'));
