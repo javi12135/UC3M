@@ -1,4 +1,5 @@
 set define off;
+
 --Accounts
 insert into accounts values('U000001', 'Javier', 'Hernandez', 'fjhdezares@gmail.com',1234123456785678, 'USA', 'Male', TO_DATE ('2002/05/14','yyyy/MM/dd'));
 insert into accounts values('U000002', 'Paula', 'Esparza', 'pauesparza@gmail.com',1234123456785679, 'USA', 'Female', TO_DATE ('2000/10/27','yyyy/MM/dd'));
