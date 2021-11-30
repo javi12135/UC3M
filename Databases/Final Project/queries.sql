@@ -4,43 +4,58 @@ FROM ACCOUNTS
 GROUP BY gender;
 
 -- II) Director full name, movie name, genre, year, PG rating and duration of all movies directed by people named ‘Bob’ , ordered by duration (longest ones first)
-SELECT
-FROM
+SELECT D.name, M.title, M.genre, M.Year, M.PG, M.Duration
+FROM Movies M, Directors D
+WHERE M.Director=D.Code AND D.Name='Bob'
+ORDER BY M.Duration DESC;
 
 -- III) All the information about the movies stored in custom lists for profile ‘Alejandro’ of user ‘U123’.
-SELECT
-FROM
+SELECT M.*
+FROM LISTCONTENTS L, MOVIELISTS M, PROFILES P
+WHERE L.listId=M.id AND M.profileId=P.id AND P.accountId='U123' AND P.name='Alejandro';
 
 -- IV) What is the genre with more movies in the platform?
-SELECT
-FROM
+SELECT MAX(Genre)
+FROM MOVIES;
 
 -- V) Code and name of the movies inserted into the database in Jan 2019
 SELECT code, title
 FROM MOVIES
-WHERE ingestionDate>='01/01/2019' AND ingestionDate<='31/01/20191';
+WHERE ingestionDate>='01/01/2019' AND ingestionDate<='31/01/2019';
 
 -- VI) Average user rating in our platform for all ‘Avengers’ movies in the platform.
-SELECT
-FROM
+SELECT AVG(V.Score)
+FROM VIEWEDMOVIES V, MOVIES M
+WHERE M.code=V.movieCode AND M.title LIKE '%Avengers%'
 
 -- VII) Movie titles, budget and names of other actors participating on movies with ‘Chris Hemsworth’
-SELECT
-FROM
+SELECT M.Title, M.budget, A.name
+FROM MOVIES M, ACTORS A, WORKEDON W
+WHERE M.code IN
+  (SELECT M.Code
+  FROM MOVIES M
+  WHERE W.movieCode=M.code AND W.actorId=A.id AND A.name='Chris Hemsworth');
 
 -- VIII) Name of the actors in the platform who have participated in more than 10 movies.
-SELECT Name
-FROM ACTORS, WORKEDON
-WHERE COUNT(WORKEDON.actorId)>10;
+SELECT A.Name
+FROM ACTORS A, WORKEDON W
+WHERE A.id=W.actorId
+GROUP BY A.id
+HAVING COUNT(A.id)>10
 
 -- IX) Total budget for all movies by genre and year, ordered by amount.
-SELECT
-FROM
+SELECT budget
+FROM MOVIES
+GROUP BY genre, year
+ORDER BY budget ASC;
 
 -- X) Average imdb score of movies where ‘Bruce Willis’ was protagonist ordered by genre
-SELECT
-FROM
+SELECT AVG(imdbScore)
+FROM MOVIES M, WORKEDON W
+WHERE W.movieCode=M.code AND W.mainCharacter='Bruce Willis'
+ORDER BY genre
 
 -- XI) Code, Name and all info about actors participating on the film previous to ‘Harry Potter and the Chamber of Secrets’
-SELECT
-FROM
+SELECT A.id, A.name
+FROM MOVIES M, ACTORS A, WORKEDON W
+WHERE M.previous=M.code AND A.id=W.actorId AND M.title='Harry Potter and the Chamber of Secrets';
