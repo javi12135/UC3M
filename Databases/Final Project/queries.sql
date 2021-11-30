@@ -31,10 +31,10 @@ WHERE M.code=V.movieCode AND M.title LIKE '%Avengers%'
 -- VII) Movie titles, budget and names of other actors participating on movies with ‘Chris Hemsworth’
 SELECT M.Title, M.budget, A.name
 FROM MOVIES M, ACTORS A, WORKEDON W
-WHERE M.code IN
-  (SELECT M.Code
-  FROM MOVIES M
-  WHERE W.movieCode=M.code AND W.actorId=A.id AND A.name='Chris Hemsworth');
+WHERE W.movieCode=M.code AND W.actorId=A.id AND W.movieCode IN
+  (SELECT W.movieCode
+  FROM WORKEDON W, ACTORS A
+  WHERE A.id=W.actorId AND A.name='Chris Hemsworth')
 
 -- VIII) Name of the actors in the platform who have participated in more than 10 movies.
 SELECT A.Name
