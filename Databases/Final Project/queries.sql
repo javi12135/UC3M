@@ -1,5 +1,5 @@
 -- I) How many users grouped by gender are subscribed to the platform?
-SELECT COUNT(*)
+SELECT Gender, COUNT(*)
 FROM ACCOUNTS
 GROUP BY gender;
 
